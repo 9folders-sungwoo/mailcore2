@@ -1073,9 +1073,13 @@ void IMAPSession::selectIfNeeded(String * folder, ErrorCode * pError)
     
     if (mState == STATE_SELECTED) {
         MCAssert(mCurrentFolder != NULL);
-        if (mCurrentFolder->caseInsensitiveCompare(folder) != 0) {
+        /**
+            Folder Operation 시 매번 select 를 하도록 변경한다.
+            기존 정보를 그대로 사용하면 캐시된 데이터를 가져오는 현상이 있음.
+         */
+//        if (mCurrentFolder->caseInsensitiveCompare(folder) != 0) {
             select(folder, pError);
-        }
+//        }
     }
     else if (mState == STATE_LOGGEDIN) {
         select(folder, pError);
