@@ -32,7 +32,10 @@ namespace mailcore {
         
         virtual void setEncoding(Encoding encoding);
         virtual Encoding encoding();
-        
+
+        virtual void setFetchNonDecoded(bool fetchNonDecoded);
+        virtual bool fetchNonDecoded();
+
         // Result.
         virtual Data * data();
         
@@ -45,6 +48,7 @@ namespace mailcore {
         String * mPartID;
         Encoding mEncoding;
         Data * mData;
+        bool mFetchNonDecoded;
         
     };
     

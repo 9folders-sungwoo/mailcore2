@@ -2990,6 +2990,11 @@ Data * IMAPSession::fetchMessageAttachmentByUID(String * folder, uint32_t uid, S
     return fetchMessageAttachment(folder, true, uid, partID, encoding, progressCallback, pError);
 }
 
+Data * IMAPSession::fetchMessageNonDecodedAttachmentByUID(String *folder, uint32_t uid, String *partID, IMAPProgressCallback *progressCallback, ErrorCode *pError)
+{
+    return fetchNonDecodedMessageAttachment(folder, true, uid, partID, true, 0, 0, Encoding7Bit, progressCallback, pError);
+}
+
 Data * IMAPSession::fetchMessageAttachmentByNumber(String * folder, uint32_t number, String * partID,
                                               Encoding encoding, IMAPProgressCallback * progressCallback, ErrorCode * pError)
 {

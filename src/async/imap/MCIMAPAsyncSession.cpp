@@ -589,6 +589,18 @@ IMAPFetchContentOperation * IMAPAsyncSession::fetchMessageAttachmentByUIDOperati
     return op;
 }
 
+IMAPFetchContentOperation * IMAPAsyncSession::fetchMessageNonDecodedAttachmentByUID(String *folder, uint32_t uid, String *partID)
+{
+    IMAPFetchContentOperation * op = new IMAPFetchContentOperation();
+    op->setMainSession(this);
+    op->setFolder(folder);
+    op->setUid(uid);
+    op->setPartID(partID);
+    op->setFetchNonDecoded(true);
+    op->autorelease();
+    return op;
+}
+
 IMAPFetchContentToFileOperation * IMAPAsyncSession::fetchMessageAttachmentToFileByUIDOperation(
                                                                                    String * folder, uint32_t uid, String * partID,
                                                                                    Encoding encoding,

@@ -717,6 +717,10 @@ vanishedMessages will be set only for servers that support QRESYNC. See [RFC5162
                                                                          encoding:(MCOEncoding)encoding
                                                                            urgent:(BOOL)urgent DEPRECATED_ATTRIBUTE;
 
+- (MCOIMAPFetchContentOperation *) fetchMessageNonDecodedAttachmentByUIDOperationWithFolder:(NSString *)folder
+                                                                                        uid:(uint32_t)uid
+                                                                                     partID:(NSString *)partID;
+
 /**
  Returns an operation for custom command.
  @param command is the text representation of the command to be send.

@@ -143,6 +143,8 @@ namespace mailcore {
         virtual IMAPFetchContentOperation * fetchMessageByUIDOperation(String * folder, uint32_t uid, bool urgent = false);
         virtual IMAPFetchContentOperation * fetchMessageAttachmentByUIDOperation(String * folder, uint32_t uid, String * partID,
                                                                                  Encoding encoding, bool urgent = false);
+        
+        virtual IMAPFetchContentOperation * fetchMessageNonDecodedAttachmentByUID(String * folder, uint32_t uid, String * partID);
 
         virtual IMAPFetchContentToFileOperation * fetchMessageAttachmentToFileByUIDOperation(
                                                                                  String * folder, uint32_t uid, String * partID,
