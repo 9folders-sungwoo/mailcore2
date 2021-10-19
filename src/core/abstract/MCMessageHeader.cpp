@@ -47,6 +47,7 @@ MessageHeader::MessageHeader(MessageHeader * other)
     setBcc(other->mBcc);
     setReplyTo(other->mReplyTo);
     setSubject(other->mSubject);
+    setRawSubject(other->mRawSubject);
     setDate(other->date());
     setReceivedDate(other->receivedDate());
     setExtraHeaders(other->mExtraHeaders);
@@ -65,6 +66,7 @@ void MessageHeader::init(bool generateDate, bool generateMessageID)
     mBcc = NULL;
     mReplyTo = NULL;
     mSubject = NULL;
+    mRawSubject = NULL;
     mDate = (time_t) -1;
     mReceivedDate = (time_t) -1;
     mExtraHeaders = NULL;
@@ -120,6 +122,7 @@ MessageHeader::~MessageHeader()
     MC_SAFE_RELEASE(mBcc);
     MC_SAFE_RELEASE(mReplyTo);
     MC_SAFE_RELEASE(mSubject);
+    MC_SAFE_RELEASE(mRawSubject);
     MC_SAFE_RELEASE(mExtraHeaders);
 }
 
@@ -296,6 +299,16 @@ void MessageHeader::setSubject(String * subject)
 String * MessageHeader::subject()
 {
     return mSubject;
+}
+
+void MessageHeader::setRawSubject(Data *data)
+{
+    MC_SAFE_REPLACE_COPY(Data, mRawSubject, data);
+}
+
+Data *MessageHeader::rawSubject()
+{
+    return mRawSubject;
 }
 
 void MessageHeader::setUserAgent(String * userAgent)
@@ -824,6 +837,7 @@ void MessageHeader::importIMAPEnvelope(struct mailimap_envelope * env)
         // subject
         subject = env->env_subject;
         setSubject(String::stringByDecodingMIMEHeaderValue(subject));
+        setRawSubject(Data::dataWithBytes(subject, (unsigned int)strlen(subject)));
     }
 
     if (env->env_sender != NULL) {

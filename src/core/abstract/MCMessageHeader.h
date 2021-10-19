@@ -54,6 +54,9 @@ namespace mailcore {
         virtual void setSubject(String * subject);
         virtual String * subject();
         
+        virtual void setRawSubject(Data *data);
+        virtual Data * rawSubject();
+        
         virtual void setUserAgent(String * userAgent);
         virtual String * userAgent();
         
@@ -96,6 +99,7 @@ namespace mailcore {
         Array * /* Address */ mBcc;
         Array * /* Address */ mReplyTo;
         String * mSubject;
+        Data * mRawSubject;
         time_t mDate;
         time_t mReceivedDate;
         HashMap * mExtraHeaders;
