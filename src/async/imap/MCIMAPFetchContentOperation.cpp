@@ -68,6 +68,14 @@ Encoding IMAPFetchContentOperation::encoding()
     return mEncoding;
 }
 
+void IMAPFetchContentOperation::setFetchNonDecoded(bool fetchNonDecoded){
+    mFetchNonDecoded = fetchNonDecoded;
+}
+
+bool IMAPFetchContentOperation::fetchNonDecoded() {
+    return mFetchNonDecoded;
+}
+
 Data * IMAPFetchContentOperation::data()
 {
     return mData;
@@ -78,7 +86,12 @@ void IMAPFetchContentOperation::main()
     ErrorCode error;
     if (mUid != 0) {
         if (mPartID != NULL) {
-            mData = session()->session()->fetchMessageAttachmentByUID(folder(), mUid, mPartID, mEncoding, this, &error);
+            if (mFetchNonDecoded) {
+                mData = session()->session()->fetchMessageNonDecodedAttachmentByUID(folder(), mUid, mPartID, this, &error);
+            }
+            else {
+                mData = session()->session()->fetchMessageAttachmentByUID(folder(), mUid, mPartID, mEncoding, this, &error);
+            }
         }
         else {
             mData = session()->session()->fetchMessageByUID(folder(), mUid, this, &error);

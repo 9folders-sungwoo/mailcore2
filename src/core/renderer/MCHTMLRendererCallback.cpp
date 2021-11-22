@@ -203,30 +203,7 @@ mailcore::HashMap * HTMLRendererTemplateCallback::templateValuesForPart(mailcore
 
 mailcore::String * HTMLRendererTemplateCallback::templateForMainHeader(MessageHeader * header)
 {
-    return MCSTR("<div style=\"background-color:#eee\">\
-                 {{#HASFROM}}\
-                 <div><b>From:</b> {{FROM}}</div>\
-                 {{/HASFROM}}\
-                 {{#HASTO}}\
-                 <div><b>To:</b> {{TO}}</div>\
-                 {{/HASTO}}\
-                 {{#HASCC}}\
-                 <div><b>Cc:</b> {{CC}}</div>\
-                 {{/HASCC}}\
-                 {{#HASBCC}}\
-                 <div><b>Bcc:</b> {{BCC}}</div>\
-                 {{/HASBCC}}\
-                 {{#NORECIPIENT}}\
-                 <div><b>To:</b> <i>Undisclosed recipient</i></div>\
-                 {{/NORECIPIENT}}\
-                 {{#HASSUBJECT}}\
-                 <div><b>Subject:</b> {{EXTRACTEDSUBJECT}}</div>\
-                 {{/HASSUBJECT}}\
-                 {{#NOSUBJECT}}\
-                 <div><b>Subject:</b> <i>No Subject</i></div>\
-                 {{/NOSUBJECT}}\
-                 <div><b>Date:</b> {{LONGDATE}}</div>\
-                 </div>");
+    return MCSTR("");
 }
 
 mailcore::String * HTMLRendererTemplateCallback::templateForEmbeddedMessageHeader(MessageHeader * header)
@@ -241,39 +218,23 @@ mailcore::String * HTMLRendererTemplateCallback::templateForImage(AbstractPart *
 
 mailcore::String * HTMLRendererTemplateCallback::templateForAttachment(AbstractPart * part)
 {
-    return MCSTR("{{#HASSIZE}}\
-                 {{#HASFILENAME}}\
-                 <div>- {{FILENAME}}, {{SIZE}}</div>\
-                 {{/HASFILENAME}}\
-                 {{#NOFILENAME}}\
-                 <div>- Untitled, {{SIZE}}</div>\
-                 {{/NOFILENAME}}\
-                 {{/HASSIZE}}\
-                 {{#NOSIZE}}\
-                 {{#HASFILENAME}}\
-                 <div>- {{FILENAME}}</div>\
-                 {{/HASFILENAME}}\
-                 {{#NOFILENAME}}\
-                 <div>- Untitled</div>\
-                 {{/NOFILENAME}}\
-                 {{/NOSIZE}}\
-                 ");
+    return MCSTR("");
 }
 
 mailcore::String * HTMLRendererTemplateCallback::templateForMessage(AbstractMessage * message)
 {
-    return MCSTR("<div style=\"padding-bottom: 20px;\">{{HEADER}}</div><div>{{BODY}}</div>");
+    return MCSTR("{{BODY}}");
 }
 
 
 mailcore::String * HTMLRendererTemplateCallback::templateForEmbeddedMessage(AbstractMessagePart * part)
 {
-    return MCSTR("<div style=\"padding-bottom: 20px;\">{{HEADER}}</div><div>{{BODY}}</div>");
+    return MCSTR("{{BODY}}");
 }
 
 mailcore::String * HTMLRendererTemplateCallback::templateForAttachmentSeparator()
 {
-    return MCSTR("<hr/>");
+    return MCSTR("");
 }
 
 mailcore::String * HTMLRendererTemplateCallback::filterHTMLForMessage(mailcore::String * html)

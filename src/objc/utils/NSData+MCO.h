@@ -18,13 +18,18 @@ namespace mailcore {
 }
 #endif
 
+typedef NS_ENUM(NSInteger, MCOEncoding);
+
 @interface NSData (MCO)
 
 #ifdef __cplusplus
 + (NSData *) mco_dataWithMCData:(mailcore::Data *)cppData;
 
 - (mailcore::Data *) mco_mcData;
+
 #endif
+
+- (NSData *) decodedDataUsingEncoding:(MCOEncoding)encoding remained:(NSData **)remaining;
 
 @end
 

@@ -9,6 +9,7 @@
 #import "NSData+MCO.h"
 
 #include "MCData.h"
+#include "MCDataDecoderUtils.h"
 
 @implementation NSData (MCO)
 
@@ -28,6 +29,18 @@
 - (mailcore::Data *) mco_mcData
 {
     return mailcore::Data::dataWithBytes((const char *) [self bytes], (unsigned int) [self length]);
+}
+
+- (NSData *)decodedDataUsingEncoding:(MCOEncoding)encoding remained:(NSData **)remaining
+{
+    using namespace mailcore;
+    Data *cppData = [self mco_mcData];
+    Data *cppRemaining = NULL;
+    Data *decoded = MCDecodeData(cppData, (Encoding)encoding, true, &cppRemaining);
+    if (cppRemaining != NULL) {
+        *remaining = [NSData mco_dataWithMCData:cppRemaining];
+    }
+    return [NSData mco_dataWithMCData:decoded];
 }
 
 @end

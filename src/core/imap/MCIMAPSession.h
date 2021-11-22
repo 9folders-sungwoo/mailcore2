@@ -122,6 +122,9 @@ namespace mailcore {
         virtual Data * fetchMessageAttachmentByUID(String * folder, uint32_t uid, String * partID,
                                                    Encoding encoding, IMAPProgressCallback * progressCallback, ErrorCode * pError);
 
+        virtual Data * fetchMessageNonDecodedAttachmentByUID(String * folder, uint32_t uid, String * partID,
+                                                             IMAPProgressCallback * progressCallback, ErrorCode * pError);
+
         virtual void fetchMessageAttachmentToFileByChunksByUID(String * folder, uint32_t uid, String * partID,
                                                        uint32_t estimatedSize, Encoding encoding,
                                                        String * outputFile, uint32_t chunkSize,
