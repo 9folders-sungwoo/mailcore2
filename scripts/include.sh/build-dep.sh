@@ -91,7 +91,7 @@ build_git_ios()
 
   if echo $library|grep '\.framework$'>/dev/null ; then
     cd "$tmpdir/bin/Release"
-    defaults write "$tmpdir/bin/Release/$library/Resources/Info.plist" "git-rev" "$rev"
+    /usr/libexec/PlistBuddy -c "Set :git-rev $rev" "$tmpdir/bin/Release/$library/Resources/Info.plist"
     mkdir -p "$resultdir/$name"
     zip -qry "$resultdir/$name/$name-$version.zip" "$library"
   else
@@ -148,7 +148,8 @@ build_git_ios()
   rm -rf "$tempbuilddir"
 
   if test x$build_for_external != x1 ; then
-    defaults write "$versions_path" "$name" "$version"
+    /usr/libexec/PlistBuddy -c "Set :$name $version" $versions_path
+
     plutil -convert xml1 "$versions_path"
   fi
 }
@@ -194,12 +195,12 @@ build_git_osx()
   mkdir -p "$builddir/downloads"
   cd "$builddir/downloads"
   if test -d "$name" ; then
-  	cd "$name"
+      cd "$name"
     git checkout master
-  	git pull --rebase
+      git pull --rebase
   else
-  	git clone $url "$name"
-  	cd "$name"
+      git clone $url "$name"
+      cd "$name"
   fi
   #version=`echo $rev | cut -c1-10`
 
@@ -227,7 +228,7 @@ build_git_osx()
   
   if echo $library|grep '\.framework$'>/dev/null ; then
     cd "$tmpdir/bin/Release"
-    defaults write "$tmpdir/bin/Release/$library/Resources/Info.plist" "git-rev" "$rev"
+    /usr/libexec/PlistBuddy -c "Set :git-rev $rev" "$tmpdir/bin/Release/$library/Resources/Info.plist"
     mkdir -p "$resultdir/$name"
     zip -qry "$resultdir/$name/$name-$version.zip" "$library"
   else
@@ -282,7 +283,7 @@ build_git_osx()
   #rm -rf "$tempbuilddir"
 
   if test x$build_for_external != x1 ; then
-    defaults write "$versions_path" "$name" "$version"
+    /usr/libexec/PlistBuddy -c "Set :$name $version" $versions_path
     plutil -convert xml1 "$versions_path"
   fi
 }
@@ -337,7 +338,7 @@ get_prebuilt_dep()
   rm -rf "$tempbuilddir"
   
   if test -d "$scriptpath/../Externals/$name" ; then
-    defaults write "$installed_versions_path" "$name" "$version"
+    /usr/libexec/PlistBuddy -c "Set :$name $version" $installed_versions_path
     plutil -convert xml1 "$installed_versions_path"
   fi
 }
