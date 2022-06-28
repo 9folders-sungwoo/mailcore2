@@ -530,7 +530,7 @@ void SMTPSession::login(ErrorCode * pError)
                                     MCUTF8(mHostname),
                                     NULL,
                                     NULL,
-                                    MCUTF8(mUsername), MCUTF8(mUsername),
+                                    /*MCUTF8(mUsername)*/ NULL, MCUTF8(mUsername),
                                     MCUTF8(mPassword), NULL);
             break;
             
@@ -548,7 +548,7 @@ void SMTPSession::login(ErrorCode * pError)
                                     MCUTF8(mHostname),
                                     NULL,
                                     NULL,
-                                    MCUTF8(mUsername), MCUTF8(mUsername),
+                                    /*MCUTF8(mUsername)*/ NULL, MCUTF8(mUsername),
                                     MCUTF8(mPassword), NULL);
             break;
             
