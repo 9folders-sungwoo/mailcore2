@@ -369,7 +369,7 @@ void IMAPSession::init()
     mAuthType = AuthTypeSASLNone;
     mConnectionType = ConnectionTypeClear;
     mCheckCertificateEnabled = true;
-    mVoIPEnabled = true;
+    mVoIPEnabled = false;
     mDelimiter = 0;
     
     mBodyProgressEnabled = true;
