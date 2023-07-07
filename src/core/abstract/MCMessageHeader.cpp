@@ -421,6 +421,7 @@ void MessageHeader::importIMFFields(struct mailimf_fields * fields)
         
         subject = single_fields.fld_subject->sbj_value;
         setSubject(String::stringByDecodingMIMEHeaderValue(subject));
+        setRawSubject(Data::dataWithBytes(subject, (unsigned int)strlen(subject)));
     }
     
     /* sender */
@@ -983,6 +984,8 @@ void MessageHeader::importIMAPReferences(Data * data)
             
             if (!broken) {
                 setSubject(String::stringByDecodingMIMEHeaderValue(single_fields.fld_subject->sbj_value));
+                char *subject = single_fields.fld_subject->sbj_value;
+                setRawSubject(Data::dataWithBytes(subject, (unsigned int)strlen(subject)));
             }
         }
     }

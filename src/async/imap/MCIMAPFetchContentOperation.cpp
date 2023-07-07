@@ -20,6 +20,7 @@ IMAPFetchContentOperation::IMAPFetchContentOperation()
     mPartID = NULL;
     mEncoding = Encoding7Bit;
     mData = NULL;
+    mPartialSize = 0;
 }
 
 IMAPFetchContentOperation::~IMAPFetchContentOperation()
@@ -76,6 +77,14 @@ bool IMAPFetchContentOperation::fetchNonDecoded() {
     return mFetchNonDecoded;
 }
 
+void IMAPFetchContentOperation::setPartialSize(uint32_t partialSize) {
+    mPartialSize = partialSize;
+}
+
+uint32_t IMAPFetchContentOperation::partialSize() {
+    return mPartialSize;
+}
+
 Data * IMAPFetchContentOperation::data()
 {
     return mData;
@@ -94,7 +103,7 @@ void IMAPFetchContentOperation::main()
             }
         }
         else {
-            mData = session()->session()->fetchMessageByUID(folder(), mUid, this, &error);
+            mData = session()->session()->fetchMessageByUID(folder(), mUid, this, &error, mPartialSize);
         }
     }
     else {

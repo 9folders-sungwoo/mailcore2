@@ -116,7 +116,7 @@ namespace mailcore {
         virtual String * customCommand(String * command, ErrorCode * pError);
 
         virtual Data * fetchMessageByUID(String * folder, uint32_t uid,
-                                         IMAPProgressCallback * progressCallback, ErrorCode * pError);
+                                         IMAPProgressCallback * progressCallback, ErrorCode * pError, uint32_t partialSize = 0);
         virtual Data * fetchMessageByNumber(String * folder, uint32_t number,
                                             IMAPProgressCallback * progressCallback, ErrorCode * pError);
         virtual Data * fetchMessageAttachmentByUID(String * folder, uint32_t uid, String * partID,
@@ -313,7 +313,7 @@ namespace mailcore {
         bool enableFeature(String * feature);
         void enableFeatures();
         Data * fetchMessage(String * folder, bool identifier_is_uid, uint32_t identifier,
-                            IMAPProgressCallback * progressCallback, ErrorCode * pError);
+                            IMAPProgressCallback * progressCallback, ErrorCode * pError, uint32_t partialSize = 0);
         void storeFlagsAndCustomFlags(String * folder, bool identifier_is_uid, IndexSet * identifiers,
                                       IMAPStoreFlagsRequestKind kind, MessageFlag flags, Array * customFlags, ErrorCode * pError);
         Data * fetchMessageAttachment(String * folder, bool identifier_is_uid,

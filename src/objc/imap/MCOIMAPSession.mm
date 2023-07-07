@@ -378,7 +378,15 @@ MCO_OBJC_SYNTHESIZE_SCALAR(dispatch_queue_t, dispatch_queue_t, setDispatchQueue,
                                                                uid:(uint32_t)uid
                                                             urgent:(BOOL)urgent
 {
-    IMAPFetchContentOperation * coreOp = MCO_NATIVE_INSTANCE->fetchMessageByUIDOperation([folder mco_mcString], uid, urgent);
+    return [self fetchMessageOperationWithFolder:folder uid:uid urgent:urgent partialSize:0];
+}
+
+- (MCOIMAPFetchContentOperation *) fetchMessageOperationWithFolder:(NSString *)folder
+                                                               uid:(uint32_t)uid
+                                                            urgent:(BOOL)urgent
+                                                       partialSize:(uint32_t)partialSize
+{
+    IMAPFetchContentOperation * coreOp = MCO_NATIVE_INSTANCE->fetchMessageByUIDOperation([folder mco_mcString], uid, urgent, partialSize);
     return MCO_TO_OBJC_OP(coreOp);
 }
 

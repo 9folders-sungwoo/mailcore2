@@ -2817,10 +2817,27 @@ err:
 #endif
 }
 
-Data * IMAPSession::fetchMessageByUID(String * folder, uint32_t uid,
-    IMAPProgressCallback * progressCallback, ErrorCode * pError)
+static int fetch_rfc822_partial(mailimap * session, bool identifier_is_uid,
+                                uint32_t identifier, char ** result, size_t * result_len, uint32_t size)
 {
-    return fetchMessage(folder, true, uid, progressCallback, pError);
+    struct mailimap_section * section;
+    struct mailimap_fetch_att * fetch_att;
+    struct mailimap_fetch_type * fetch_type;
+    
+    section = mailimap_section_new(NULL);
+    fetch_att = mailimap_fetch_att_new_body_peek_section_partial(section, 0, size);
+    fetch_type = mailimap_fetch_type_new_fetch_att(fetch_att);
+    int r = fetch_imap(session, identifier_is_uid, identifier,
+                       fetch_type, result, result_len);
+    mailimap_fetch_type_free(fetch_type);
+    
+    return r;
+}
+
+Data * IMAPSession::fetchMessageByUID(String * folder, uint32_t uid,
+    IMAPProgressCallback * progressCallback, ErrorCode * pError, uint32_t partialSize)
+{
+    return fetchMessage(folder, true, uid, progressCallback, pError, partialSize);
 }
 
 Data * IMAPSession::fetchMessageByNumber(String * folder, uint32_t number,
@@ -2830,7 +2847,7 @@ Data * IMAPSession::fetchMessageByNumber(String * folder, uint32_t number,
 }
 
 Data * IMAPSession::fetchMessage(String * folder, bool identifier_is_uid, uint32_t identifier,
-                                 IMAPProgressCallback * progressCallback, ErrorCode * pError)
+                                 IMAPProgressCallback * progressCallback, ErrorCode * pError, uint32_t partialSize)
 {
     char * rfc822;
     size_t rfc822_len;
@@ -2845,7 +2862,12 @@ Data * IMAPSession::fetchMessage(String * folder, bool identifier_is_uid, uint32
     mProgressCallback = progressCallback;
     
     rfc822 = NULL;
-    r = fetch_rfc822(mImap, identifier_is_uid, identifier, &rfc822, &rfc822_len);
+    if (partialSize == 0) {
+        r = fetch_rfc822(mImap, identifier_is_uid, identifier, &rfc822, &rfc822_len);
+    }
+    else {
+        r = fetch_rfc822_partial(mImap, identifier_is_uid, identifier, &rfc822, &rfc822_len, partialSize);
+    }
     if (r == MAILIMAP_NO_ERROR) {
         size_t len;
         

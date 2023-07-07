@@ -564,13 +564,14 @@ IMAPFetchMessagesOperation * IMAPAsyncSession::syncMessagesByUIDOperation(String
     return op;
 }
 
-IMAPFetchContentOperation * IMAPAsyncSession::fetchMessageByUIDOperation(String * folder, uint32_t uid, bool urgent)
+IMAPFetchContentOperation * IMAPAsyncSession::fetchMessageByUIDOperation(String * folder, uint32_t uid, bool urgent, uint32_t partialSize)
 {
     IMAPFetchContentOperation * op = new IMAPFetchContentOperation();
     op->setMainSession(this);
     op->setFolder(folder);
     op->setUid(uid);
     op->setUrgent(urgent);
+    op->setPartialSize(partialSize);
     op->autorelease();
     return op;
 }

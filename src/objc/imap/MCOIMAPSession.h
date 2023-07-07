@@ -606,6 +606,11 @@ vanishedMessages will be set only for servers that support QRESYNC. See [RFC5162
                                                                uid:(uint32_t)uid
                                                             urgent:(BOOL)urgent;
 
+- (MCOIMAPFetchContentOperation *) fetchMessageOperationWithFolder:(NSString *)folder
+                                                               uid:(uint32_t)uid
+                                                            urgent:(BOOL)urgent
+                                                       partialSize:(uint32_t)partialSize;
+
 /**
  Returns an operation to fetch the content of a message.
 

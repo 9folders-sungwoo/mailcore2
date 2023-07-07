@@ -140,7 +140,7 @@ namespace mailcore {
         virtual IMAPFetchMessagesOperation * syncMessagesByUIDOperation(String * folder, IMAPMessagesRequestKind requestKind,
                                                                         IndexSet * indexes, uint64_t modSeq);
         
-        virtual IMAPFetchContentOperation * fetchMessageByUIDOperation(String * folder, uint32_t uid, bool urgent = false);
+        virtual IMAPFetchContentOperation * fetchMessageByUIDOperation(String * folder, uint32_t uid, bool urgent = false, uint32_t partialSize = 0);
         virtual IMAPFetchContentOperation * fetchMessageAttachmentByUIDOperation(String * folder, uint32_t uid, String * partID,
                                                                                  Encoding encoding, bool urgent = false);
         

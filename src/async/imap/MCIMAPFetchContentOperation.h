@@ -35,6 +35,9 @@ namespace mailcore {
 
         virtual void setFetchNonDecoded(bool fetchNonDecoded);
         virtual bool fetchNonDecoded();
+        
+        virtual void setPartialSize(uint32_t partialSize);
+        virtual uint32_t partialSize();
 
         // Result.
         virtual Data * data();
@@ -49,7 +52,7 @@ namespace mailcore {
         Encoding mEncoding;
         Data * mData;
         bool mFetchNonDecoded;
-        
+        uint32_t mPartialSize;
     };
     
 }
