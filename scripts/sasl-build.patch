@@ -1,0 +1,43 @@
+From 5c0fa7d3e636a0eeb6ff9c878659b1356b9f228a Mon Sep 17 00:00:00 2001
+From: Sungwoo Han <asmera@outlook.com>
+Date: Sat, 5 Aug 2023 02:20:47 +0900
+Subject: [PATCH] build for 9folders
+
+---
+ build-mac/dependencies/prepare-cyrus-sasl.sh | 8 ++++----
+ 1 file changed, 4 insertions(+), 4 deletions(-)
+
+diff --git a/build-mac/dependencies/prepare-cyrus-sasl.sh b/build-mac/dependencies/prepare-cyrus-sasl.sh
+index bb60f03..19a5520 100755
+--- a/build-mac/dependencies/prepare-cyrus-sasl.sh
++++ b/build-mac/dependencies/prepare-cyrus-sasl.sh
+@@ -115,8 +115,8 @@ export LANG=en_US.US-ASCII
+ LIB_NAME=$ARCHIVE
+ TARGETS="iPhoneOS iPhoneSimulator"
+ 
+-SDK_IOS_MIN_VERSION=7.0
+-SDK_IOS_VERSION="`xcodebuild -showsdks 2>/dev/null | grep iphoneos | sed 's/.*iphoneos\(.*\)/\1/'`"
++SDK_IOS_MIN_VERSION=11.0
++SDK_IOS_VERSION="`xcodebuild -showsdks 2>/dev/null | grep ' iphoneos' | sed 's/.*iphoneos\(.*\)/\1/'`"
+ BUILD_DIR="$tmpdir/build"
+ INSTALL_PATH="${BUILD_DIR}/${LIB_NAME}/universal"
+ BITCODE_FLAGS="-fembed-bitcode"
+@@ -184,13 +184,13 @@ for TARGET in $TARGETS; do
+     case $TARGET in
+         (iPhoneOS)
+             ARCH=arm
+-            MARCHS="armv7 armv7s arm64"
++            MARCHS="arm64"
+             EXTRA_FLAGS="$BITCODE_FLAGS -miphoneos-version-min=$SDK_IOS_MIN_VERSION"
+             TARGET_SUFFIX=""
+             ;;
+         (iPhoneSimulator)
+             ARCH=i386
+-            MARCHS="i386 x86_64 arm64"
++            MARCHS="x86_64 arm64"
+             EXTRA_FLAGS="$BITCODE_FLAGS -miphoneos-version-min=$SDK_IOS_MIN_VERSION"
+             TARGET_SUFFIX="-simulator"
+             ;;
+-- 
+2.37.0
+

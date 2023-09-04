@@ -5,7 +5,8 @@
 #include <pthread.h>
 #if __APPLE__
 #include <dispatch/dispatch.h>
-#include <libkern/OSAtomic.h>
+//#include <libkern/OSAtomic.h>
+#include <os/lock.h>
 #endif
 
 #include <MailCore/MCUtils.h>
@@ -58,7 +59,7 @@ namespace mailcore {
         
     private:
 #if __APPLE__
-        OSSpinLock mLock;
+        os_unfair_lock mLock;
 #else
         pthread_mutex_t mLock;
 #endif

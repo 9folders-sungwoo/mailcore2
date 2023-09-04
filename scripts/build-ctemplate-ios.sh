@@ -4,7 +4,7 @@ pushd "`dirname "$0"`" > /dev/null
 scriptpath="`pwd`"
 popd > /dev/null
 
-. "$scriptpath/include.sh/build-dep.sh"
+. "$scriptpath/include.sh/build-dep-9.sh"
 
 url="https://github.com/dinhviethoa/ctemplate"
 rev=2c6ff9ae7d0ae1b973e57dd19859b95282776194

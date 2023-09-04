@@ -41,7 +41,7 @@ Object::~Object()
 void Object::init()
 {
 #if __APPLE__
-    mLock = OS_SPINLOCK_INIT;
+    mLock = MC_LOCK_INITIAL_VALUE;
 #else
     pthread_mutex_init(&mLock, NULL);
 #endif
