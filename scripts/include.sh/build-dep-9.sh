@@ -21,6 +21,8 @@ build_git_ios()
 	  return
 	fi
   fi
+
+  /usr/libexec/PlistBuddy -c "Set :$name 0" "$versions_path"
   #complete check - 1
   version=1
 
