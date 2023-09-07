@@ -15,7 +15,7 @@ build_git_ios()
   versions_path="$scriptpath/build-versions.plist"
   version=$(/usr/libexec/PlistBuddy -c "Print $name" "$versions_path")
 
-  if test -d "$scriptpath/../Externals/$name" ; then
+  if test -d "$scriptpath/../Externals/$name/lib/iphoneos" ; then
 	if test "x$version" = x1 ; then
 	  echo The $name library is already built.
 	  return
