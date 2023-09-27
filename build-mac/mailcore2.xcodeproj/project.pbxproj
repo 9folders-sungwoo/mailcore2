@@ -4152,6 +4152,8 @@
 				IOS_IPHONEOS_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan-ios/lib/iphoneos\" \"$(SRCROOT)/../Externals/ctemplate-ios/lib/iphoneos\" \"$(SRCROOT)/../Externals/libsasl-ios/lib/iphoneos\" \"$(SRCROOT)/../Externals/tidy-html5-ios/lib/iphoneos\"";
 				IOS_IPHONESIMULATOR_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan-ios/lib/iphonesimulator\" \"$(SRCROOT)/../Externals/ctemplate-ios/lib/iphonesimulator\" \"$(SRCROOT)/../Externals/libsasl-ios/lib/iphonesimulator\" \"$(SRCROOT)/../Externals/tidy-html5-ios/lib/iphonesimulator\"";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				"LIBRARY_SEARCH_PATHS[sdk=iphoneos*]" = "$(IOS_IPHONEOS_LIBRARY_SEARCH_PATHS)";
+				"LIBRARY_SEARCH_PATHS[sdk=iphonesimulator*]" = "$(IOS_IPHONESIMULATOR_LIBRARY_SEARCH_PATHS)";
 				OTHER_LDFLAGS = (
 					"-lctemplate-ios",
 					"-letpan-ios",
@@ -4529,7 +4531,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEAD_CODE_STRIPPING = NO;
-				ENABLE_BITCODE = YES;
 				EXECUTABLE_PREFIX = lib;
 				IOS_HEADERS_SEARCH_PATHS = "\"$(SRCROOT)/../src/core/basetypes/icu-ucsdet/include\" \"$(SRCROOT)/../Externals/libetpan-ios/include\" \"$(SRCROOT)/../Externals/ctemplate-ios/include\" \"$(SRCROOT)/../Externals/tidy-html5-ios/include\" /usr/include/libxml2";
 				IOS_IPHONEOS_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan-ios/lib/iphoneos\" \"$(SRCROOT)/../Externals/ctemplate-ios/lib/iphoneos\" \"$(SRCROOT)/../Externals/libsasl-ios/lib/iphoneos\" \"$(SRCROOT)/../Externals/tidy-html5-ios/lib/iphoneos\"";
@@ -4549,7 +4550,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				DEAD_CODE_STRIPPING = NO;
-				ENABLE_BITCODE = YES;
 				EXECUTABLE_PREFIX = lib;
 				IOS_HEADERS_SEARCH_PATHS = "\"$(SRCROOT)/../src/core/basetypes/icu-ucsdet/include\" \"$(SRCROOT)/../Externals/libetpan-ios/include\" \"$(SRCROOT)/../Externals/ctemplate-ios/include\" \"$(SRCROOT)/../Externals/tidy-html5-ios/include\" /usr/include/libxml2";
 				IOS_IPHONEOS_LIBRARY_SEARCH_PATHS = "\"$(SRCROOT)/../Externals/libetpan-ios/lib/iphoneos\" \"$(SRCROOT)/../Externals/ctemplate-ios/lib/iphoneos\" \"$(SRCROOT)/../Externals/libsasl-ios/lib/iphoneos\" \"$(SRCROOT)/../Externals/tidy-html5-ios/lib/iphoneos\"";
